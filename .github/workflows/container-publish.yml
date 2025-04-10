@@ -1,0 +1,48 @@
+name: Publish to GitHub Container Registry
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+  
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      packages: write
+
+    steps:
+    - uses: actions/checkout@v4
+
+    - name: Set up JDK 21
+      uses: actions/setup-java@v4
+      with:
+        java-version: '21'
+        distribution: 'temurin'
+    - name: Setup Gradle
+      uses: gradle/actions/setup-gradle@af1da67850ed9a4cedd57bfd976089dd991e2582 # v4.0.0
+      with:
+        dependency-graph: generate-and-submit
+    - name: Create container image recipe-finder-client
+      run: (cd recipe-finder-client && ./gradlew bootBuildImage --imageName="ghcr.io/${{ github.repository }}:recipe-finder-client")
+
+    - name: Create container image favorite-recipes-server
+      run: (cd favorite-recipes-server && ./gradlew bootBuildImage --imageName="ghcr.io/${{ github.repository }}:favorite-recipes-server")
+
+      - name: Create container image fridge-server
+      run: (cd fridge-server && ./gradlew bootBuildImage --imageName="ghcr.io/${{ github.repository }}:fridge-server")
+
+    - uses: docker/login-action@65b78e6e13532edd9afa3aa52ac7964289d1a9c1
+      with:
+        registry: ghcr.io
+        username: ${{ github.actor }}
+        password: ${{ secrets.GITHUB_TOKEN }}
+
+    - run: docker push ghcr.io/${{ github.repository }}:recipe-finder-client
+    - run: docker push ghcr.io/${{ github.repository }}:favorite-recipes-server
+    - run: docker push ghcr.io/${{ github.repository }}:fridge-server
