@@ -1,0 +1,14 @@
+spring.ai:
+  model:
+    chat: openai
+    image: openai
+  openai:
+    chat:
+      options:
+        model: gpt-4o
+        temperature: 1.0
+    image.options:
+      model: dall-e-3
+      size: 1024x1024
+      style: natural
+    api-key:

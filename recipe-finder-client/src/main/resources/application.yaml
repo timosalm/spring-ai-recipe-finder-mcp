@@ -1,0 +1,23 @@
+spring:
+  application.name: recipe-finder-client
+  ai:
+    model:
+      chat: ollama
+      embedding: none
+      image: none
+    ollama.chat:
+      model: llama3.2
+      options.temperature: 0.5
+    openai.api-key: PLACEHOLDER
+    azure.openai:
+      api-key: PLACEHOLDER
+      endpoint: https://PLACEHOLDER
+    mcp.client:
+      sse.connections:
+        server1.url: http://localhost:8081
+        server2.url: http://localhost:8082
+      toolcallback.enabled: true
+  docker.compose.lifecycle-management: none
+logging.level.io.modelcontextprotocol:
+  client: DEBUG
+  spec: DEBUG

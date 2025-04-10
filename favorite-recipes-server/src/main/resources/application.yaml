@@ -1,0 +1,20 @@
+spring:
+  application.name: favorite-recipes-service
+  ai:
+    mcp.server.name: ${spring.application.name}
+    model:
+      chat: none
+      embedding: ollama
+      image: none
+    ollama.embedding.model: llama3.2
+    openai.api-key: PLACEHOLDER
+    azure.openai:
+      api-key: PLACEHOLDER
+      endpoint: https://PLACEHOLDER
+    vectorstore.redis.initialize-schema: true
+  servlet.multipart:
+    max-file-size: 100MB
+    max-request-size: 100MB
+server.port: 8082
+management.endpoints.web.exposure.include: "*"
+logging.level.io.modelcontextprotocol.server: DEBUG

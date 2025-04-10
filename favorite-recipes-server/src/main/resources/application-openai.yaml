@@ -1,0 +1,5 @@
+spring:
+  ai:
+    model.embedding: openai
+    openai:
+      api-key:

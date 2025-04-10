@@ -1,0 +1,3 @@
+spring.docker.compose:
+  profiles.active: ollama
+  lifecycle-management: start-and-stop

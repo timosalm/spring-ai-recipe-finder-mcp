@@ -1,0 +1,47 @@
+plugins {
+	id 'java'
+	id 'org.springframework.boot' version '3.4.4'
+	id 'io.spring.dependency-management' version '1.1.7'
+}
+
+group = 'com.example'
+version = '0.0.1-SNAPSHOT'
+
+java {
+	toolchain {
+		languageVersion = JavaLanguageVersion.of(21)
+	}
+}
+
+repositories {
+	mavenCentral()
+	maven { url 'https://repo.spring.io/snapshot' }
+	maven {
+		name = 'Central Portal Snapshots'
+		url = 'https://central.sonatype.com/repository/maven-snapshots/'
+	}
+}
+
+dependencies {
+	implementation platform("org.springframework.ai:spring-ai-bom:1.0.0-SNAPSHOT")
+
+	implementation 'org.springframework.boot:spring-boot-starter-actuator'
+
+	implementation 'org.springframework.ai:spring-ai-starter-mcp-server-webmvc'
+	implementation 'org.springframework.ai:spring-ai-starter-vector-store-redis'
+
+	implementation 'org.springframework.ai:spring-ai-pdf-document-reader'
+	implementation 'org.springframework.ai:spring-ai-starter-model-ollama'
+	implementation 'org.springframework.ai:spring-ai-starter-model-openai'
+	implementation 'org.springframework.ai:spring-ai-starter-model-azure-openai'
+
+	developmentOnly 'org.springframework.boot:spring-boot-docker-compose'
+	developmentOnly 'org.springframework.ai:spring-ai-spring-boot-docker-compose'
+
+	testImplementation 'org.springframework.boot:spring-boot-starter-test'
+	testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
+}
+
+tasks.named('test') {
+	useJUnitPlatform()
+}
