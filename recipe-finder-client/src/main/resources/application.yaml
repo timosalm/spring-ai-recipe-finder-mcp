@@ -5,10 +5,13 @@ spring:
       chat: ollama
       embedding: none
       image: none
+      audio:
+        speech: none
+        transcription: none
+      moderation: none
     ollama.chat:
       model: llama3.2
       options.temperature: 0.5
-    openai.api-key: PLACEHOLDER
     azure.openai:
       api-key: PLACEHOLDER
       endpoint: https://PLACEHOLDER
