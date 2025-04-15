@@ -12,9 +12,6 @@ spring:
     ollama.chat:
       model: llama3.2
       options.temperature: 0.5
-    azure.openai:
-      api-key: PLACEHOLDER
-      endpoint: https://PLACEHOLDER
     mcp.client:
       sse.connections:
         server1.url: http://localhost:8081

@@ -11,9 +11,6 @@ spring:
         transcription: none
       moderation: none
     ollama.embedding.model: llama3.2
-    azure.openai:
-      api-key: PLACEHOLDER
-      endpoint: https://PLACEHOLDER
     vectorstore.redis.initialize-schema: true
   servlet.multipart:
     max-file-size: 100MB
