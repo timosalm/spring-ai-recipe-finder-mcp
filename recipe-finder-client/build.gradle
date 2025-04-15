@@ -17,9 +17,11 @@ repositories {
 	mavenCentral()
 }
 
-dependencies {
-	implementation platform("org.springframework.ai:spring-ai-bom:1.0.0-M7")
+ext {
+	set('springAiVersion', "1.0.0-M7")
+}
 
+dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-web'
 	implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
 	implementation 'org.springframework.boot:spring-boot-starter-actuator'
@@ -34,6 +36,12 @@ dependencies {
 
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 	testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
+}
+
+dependencyManagement {
+	imports {
+		mavenBom "org.springframework.ai:spring-ai-bom:${springAiVersion}"
+	}
 }
 
 tasks.named('test') {
