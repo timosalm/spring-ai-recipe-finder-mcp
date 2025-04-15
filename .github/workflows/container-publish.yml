@@ -34,7 +34,7 @@ jobs:
     - name: Create container image favorite-recipes-server
       run: (cd favorite-recipes-server && ./gradlew bootBuildImage --imageName="ghcr.io/${{ github.repository }}:favorite-recipes-server")
 
-      - name: Create container image fridge-server
+    - name: Create container image fridge-server
       run: (cd fridge-server && ./gradlew bootBuildImage --imageName="ghcr.io/${{ github.repository }}:fridge-server")
 
     - uses: docker/login-action@65b78e6e13532edd9afa3aa52ac7964289d1a9c1
