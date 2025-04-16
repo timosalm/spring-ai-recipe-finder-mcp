@@ -1,0 +1,38 @@
+services:
+
+  favorite-recipes-server:
+    image: favorite-recipes-server
+    ports:
+      - "8082:8082"
+    depends_on:
+    - redis
+    environment:
+    - SPRING_DATA_REDIS_HOST=redis
+    - SPRING_AI_OLLAMA_BASE_URL=http://host.docker.internal:11434
+    - SPRING_AI_OPENAI_API_KEY
+    - SPRING_AI_AZURE_OPENAI_API_KEY
+    - SPRING_AI_AZURE_OPENAI_ENDPOINT
+    - SPRING_PROFILES_ACTIVE
+
+  fridge-server:
+    image: fridge-server
+    ports:
+      - "8081:8081"
+
+  recipe-finder-client:
+    image: recipe-finder-client
+    ports:
+      - "8080:8080"
+    restart: on-failure
+    depends_on:
+      - favorite-recipes-server
+      - fridge-server
+    environment:
+    - SPRING_AI_OLLAMA_BASE_URL=http://host.docker.internal:11434
+    - SPRING_AI_OPENAI_API_KEY
+    - SPRING_AI_AZURE_OPENAI_API_KEY
+    - SPRING_AI_AZURE_OPENAI_ENDPOINT
+    - SPRING_PROFILES_ACTIVE
+    - SPRING_AI_MCP_CLIENT_SSE_CONNECTIONS_SERVER1_URL=http://favorite-recipes-server:8082
+    - SPRING_AI_MCP_CLIENT_SSE_CONNECTIONS_SERVER2_URL=http://fridge-server:8081
+
