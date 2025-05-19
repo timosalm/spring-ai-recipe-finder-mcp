@@ -16,7 +16,6 @@ spring:
       sse.connections:
         server1.url: http://localhost:8081
         server2.url: http://localhost:8082
-      toolcallback.enabled: true
   docker.compose.lifecycle-management: none
 logging.level.io.modelcontextprotocol:
   client: DEBUG

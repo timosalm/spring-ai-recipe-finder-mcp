@@ -62,7 +62,7 @@ class RecipeUiController {
         var chatModelProvider = chatModel.getClass().getSimpleName().replace("ChatModel", "");
         var chatModelDefaultOptions = chatModel.getDefaultOptions();
         try {
-            var modelName = (String)FieldUtils.readField(chatModelDefaultOptions, "model", true);
+            var modelName = (String) FieldUtils.readField(chatModelDefaultOptions, "model", true);
             modelNames.add("%s (%s)".formatted(chatModelProvider, capitalize(modelName)));
         } catch (Exception e1) {
             try {

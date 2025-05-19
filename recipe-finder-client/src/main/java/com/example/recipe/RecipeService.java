@@ -56,7 +56,7 @@ class RecipeService {
 			var imagePromptTemplate = new PromptTemplate(imageForRecipePromptResource);
 			var imagePromptInstructions = imagePromptTemplate.render(Map.of("recipe", recipe.name(), "ingredients", String.join(",", recipe.ingredients())));
 			var imageGeneration = imageModel.get().call(new ImagePrompt(imagePromptInstructions)).getResult();
-			return new Recipe(recipe, imageGeneration.getOutput().getUrl());
+			recipe = new Recipe(recipe, imageGeneration.getOutput().getUrl());
 		}
 		return recipe;
 	}

@@ -14,7 +14,7 @@ class RecipeFinderClientConfiguration {
 	private Resource fixJsonResponsePromptResource;
 
 	@Bean
-	ChatClient chatClient(ChatClient.Builder chatClientBuilder, ToolCallbackProvider tools) {
-		return chatClientBuilder.defaultTools(tools).defaultSystem(fixJsonResponsePromptResource).build();
+	ChatClient chatClient(ChatClient.Builder chatClientBuilder, ToolCallbackProvider toolsCallbacks) {
+		return chatClientBuilder.defaultToolCallbacks(toolsCallbacks).defaultSystem(fixJsonResponsePromptResource).build();
 	}
 }

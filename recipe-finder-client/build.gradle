@@ -18,7 +18,7 @@ repositories {
 }
 
 ext {
-	set('springAiVersion', "1.0.0-M7")
+	set('springAiVersion', "1.0.0")
 }
 
 dependencies {
@@ -30,6 +30,7 @@ dependencies {
 	implementation 'org.springframework.ai:spring-ai-starter-model-ollama'
 	implementation 'org.springframework.ai:spring-ai-starter-model-openai'
 	implementation 'org.springframework.ai:spring-ai-starter-model-azure-openai'
+	implementation('org.apache.commons:commons-lang3')
 
 	developmentOnly 'org.springframework.boot:spring-boot-docker-compose'
 	developmentOnly 'org.springframework.ai:spring-ai-spring-boot-docker-compose'
