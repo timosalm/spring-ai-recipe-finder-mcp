@@ -1,0 +1,8 @@
+spring.ai:
+  model:
+    chat: none
+    image: none
+  openai:
+    chat:
+      options:
+        temperature: 1.0

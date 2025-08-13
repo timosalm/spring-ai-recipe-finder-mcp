@@ -4,6 +4,8 @@ This sample code demonstrates how to implement [Model Context Protocol (MCP)](ht
 
 MCP is an open protocol that standardizes the connection between AI models and various data sources and tools, enabling developers to create agents on top of LLMs. MCP follows a client-server architecture, where an AI application  (MCP host) communicates through embedded MCP clients to MCP servers to access specific resources or functionalities. 
 
+***Node: This a version using the [SAP Cloud SDK for AI](https://github.com/SAP/ai-sdk-java)***
+
 *Note: A Spring AI Recipe Finder implementation without MCP is available [here](https://github.com/timosalm/spring-ai-recipe-finder).*
 
 
@@ -11,11 +13,11 @@ MCP is an open protocol that standardizes the connection between AI models and v
 
 # Setup
 ## LLM
-Currently Ollama, OpenAI, and Azure OpenAI are supported AI providers.
+As neither Ollama, nor SAP AI Core don't yet provide a text-to-image model, recipe image generation is not available.
 
 ### Local LLM (Ollama)
 As Ollama doesn't yet provide a text-to-image model, recipe image generation is not available with this setup. 
-From version 3.1 Llama is supporting Function Calling even if it's not working well with the small models.
+From version 3.1 Llama is supporting Tool Calling even if it's not working well with the small models.
 
 Even if an option is provided to start and configure a Llama 3.2 instance with docker compose, depending on your system (e.g. ARM macs) this is not a recommended setup due to performance reasons.
 
@@ -24,12 +26,6 @@ Pull the llama3.2 model (Ollama 0.2.8 or newer, and Llama 3.1 or newer is requir
     ```
     ollama pull llama3.2
     ```
-
-### Azure OpenAI
-Make sure the deployment names of the models match exactly what's in your application-azure.yaml configuration files.
-
-Currently, [**only some regions support image generation** with Dall-E](https://learn.microsoft.com/en-us/azure/ai-services/openai/concepts/models#dall-e-models).
-If you use a region that doesn't support it, you have to disable the image generation by setting `ai.azure.openai.image.enabled: false` in the application-azure.yaml configuration files to not run into errors.
 
 ### Vector DB
 On your local machine, a Redis database is automatically started and configured with Docker Compose for the favorite-recipes-server. As a fallback if no Redis database is configured, a SimpleVectorStore instance will be used.
@@ -51,18 +47,10 @@ The easiest way to run the application is via Docker Compose.
 /run-local.sh ollama-container
 ```
 
-#### OpenAI
+### SAP AI Core
 ```
-export SPRING_AI_OPENAI_API_KEY=<INSERT KEY HERE>
-export SPRING_PROFILES_ACTIVE=openai
-/run-local.sh
-```
-
-#### Azure OpenAI
-```
-export SPRING_AI_AZURE_OPENAI_API_KEY=<INSERT KEY HERE>
-export SPRING_AI_AZURE_OPENAI_ENDPOINT=https://{your-resource-name}.openai.azure.com
-export SPRING_PROFILES_ACTIVE=azure
+export AICORE_SERVICE_KEY='{"appname": ...}'
+export SPRING_PROFILES_ACTIVE=sap
 /run-local.sh
 ```
 
@@ -75,18 +63,10 @@ SPRING_DOCKER_COMPOSE_ENABLED=false # If want to use the SimpleVectorStore inste
 ./gradlew bootRun
 ```
 
-### OpenAI
+### SAP AI Core
 ```
-export SPRING_AI_OPENAI_API_KEY=<INSERT KEY HERE>
-export SPRING_PROFILES_ACTIVE=openai
-./gradlew bootRun
-```
-
-### Azure OpenAI
-```
-export SPRING_AI_AZURE_OPENAI_API_KEY=<INSERT KEY HERE>
-export SPRING_AI_AZURE_OPENAI_ENDPOINT=https://{your-resource-name}.openai.azure.com
-export SPRING_PROFILES_ACTIVE=azure
+export AICORE_SERVICE_KEY='{"appname": ...}'
+export SPRING_PROFILES_ACTIVE=sap
 ./gradlew bootRun
 ```
 

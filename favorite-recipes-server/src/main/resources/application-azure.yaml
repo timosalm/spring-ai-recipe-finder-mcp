@@ -1,7 +1,0 @@
-spring:
-  ai:
-    model.embedding: azure-openai
-    azure.openai:
-      embedding.options.deployment-name: gpt-4o
-      api-key:
-      endpoint: https://{your-resource-name}.openai.azure.com
