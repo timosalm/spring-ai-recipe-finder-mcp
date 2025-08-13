@@ -90,15 +90,13 @@ export SPRING_PROFILES_ACTIVE=azure
 ./gradlew bootRun
 ```
 
-## Kubernetes Deployment (WIP)
-
 # Using the application
 
 Open [http://localhost:8080](http://localhost:8080) in your browser. 
 Enter the ingredients (e.g. "Cheese") you want to find a recipe for in the form and press the "find" button.
 
-## Function Calling 
-By checking the "Prefer available ingredients" checkbox, [Function Calling](https://docs.spring.io/spring-ai/reference/1.0/concepts.html#_function_calling) will be enabled.
+## Tool Calling 
+By checking the "Prefer available ingredients" checkbox, [Tool Calling](https://docs.spring.io/spring-ai/reference/concepts.html#concept-fc) will be enabled.
 As the functionalities to add always available ingredients and for the API call to check the available ingredients in the fridge are not yet implemented, they can be configured via the `app.available-ingredients-in-fridge` property in [fridge-server's application.yaml](fridge-server/src/main/resources/application.yaml).
 
 Bacon and onions are currently configured for available ingredients in fridge.
@@ -106,7 +104,7 @@ With the input "Cheese", you should get a recipe with cheese and bacon.
 ![](docs/images/ui-sample-function-calling.png)
 
 ## Retrieval-Augmented Generation(RAG)
-By checking the "Prefer own recipes" checkbox, [Retrieval-Augmented Generation](https://docs.spring.io/spring-ai/reference/1.0/concepts.html#concept-rag) will be enabled.
+By checking the "Prefer own recipes" checkbox, [Retrieval-Augmented Generation](https://docs.spring.io/spring-ai/reference/concepts.html#concept-rag) will be enabled.
 
 To upload your own PDF documents for recipes to the vector database, there is a REST API endpoint implemented. 
 ```
