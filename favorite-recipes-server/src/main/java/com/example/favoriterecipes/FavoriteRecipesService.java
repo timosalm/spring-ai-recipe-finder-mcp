@@ -5,7 +5,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.ai.document.Document;
 import org.springframework.ai.reader.pdf.PagePdfDocumentReader;
 import org.springframework.ai.reader.pdf.config.PdfDocumentReaderConfig;
-import org.springframework.ai.tool.annotation.Tool;
+import org.springaicommunity.mcp.annotation.McpTool;
 import org.springframework.ai.transformer.splitter.TokenTextSplitter;
 import org.springframework.ai.vectorstore.SearchRequest;
 import org.springframework.ai.vectorstore.VectorStore;
@@ -30,7 +30,13 @@ public class FavoriteRecipesService {
 		this.vectorStore = vectorStore;
 	}
 
-	@Tool(description = "Fetches the favorite recipes for a list of ingredients")
+	/*
+		@McpTool - Implements MCP tools with automatic JSON schema generation
+		@McpResource - Provides access to resources via URI templates
+		@McpPrompt - Generates prompt messages
+		@McpComplete - Provides auto-completion functionality
+	 */
+	@McpTool(description = "Fetches the favorite recipes for a list of ingredients")
 	String fetchFavoriteRecipes(List<String> ingredients) {
 		log.info("Fetching favorite recipes for a list of ingredients from vector store: {}", ingredients);
 		var searchRequest = SearchRequest.builder()

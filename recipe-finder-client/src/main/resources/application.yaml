@@ -13,7 +13,7 @@ spring:
       model: llama3.2
       options.temperature: 0.5
     mcp.client:
-      sse.connections:
+      streamable-http.connections:
         server1.url: http://localhost:8081
         server2.url: http://localhost:8082
   docker.compose.lifecycle-management: none

@@ -13,11 +13,6 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 class FavoriteRecipesServerConfiguration {
 
-	@Bean
-	ToolCallbackProvider favoriteRecipesTools(FavoriteRecipesService favoriteRecipesService) {
-		return MethodToolCallbackProvider.builder().toolObjects(favoriteRecipesService).build();
-	}
-
 	@ConditionalOnMissingBean(VectorStore.class)
 	@Bean
 	VectorStore simpleVectorStore(EmbeddingModel embeddingModel) {
